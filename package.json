@@ -19,8 +19,8 @@
     "parcel": "^2.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sequelize": "^6.23.2",
-    "sqlite3": "^5.1.1"
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.15.0",
