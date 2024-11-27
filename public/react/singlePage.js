@@ -47,7 +47,7 @@ export const SinglePage = ({goToMain, slug}) => {
   }, [])
 
 
-  return (
+  return ( article &&
   <div className='SinglePage'>
 
 

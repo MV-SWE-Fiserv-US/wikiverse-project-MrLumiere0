@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import apiURL from './api'
 
 
-export const AddPage = ({ goToMain }) => {
+export const AddPage = ({ postPage }) => {
     const [formData, setFormData] = useState({
         title: "",
         content: "",
@@ -21,24 +21,7 @@ export const AddPage = ({ goToMain }) => {
         console.log(formData)
     }
 
-async function handleFormSubmit (event) {
-    event.preventDefault()
 
-    try{
-        const response  = await fetch("http://localhost:3000/api/wiki/", {
-            method:"POST",
-            headers: {
-                'Content-Type': 'application/json'     
-               },
-               body: JSON.stringify(formData)
-        })
-        if(response.ok){
-            goToMain()
-        }
-    }
-    catch(err){
-        console.log("Could not create new entry")
-    }
    
 }
   
@@ -46,9 +29,6 @@ useEffect(() => {
 handleFormData()
 }, [])
 
-    
-
-    
 
 
     return (
@@ -60,7 +40,7 @@ handleFormData()
 
     
         
-        <form onSubmit ={(event) => handleFormSubmit(event)} className='form'>  
+        <form onSubmit ={postPage} className='form'>  
             <label>
                 Title:
                 </label>

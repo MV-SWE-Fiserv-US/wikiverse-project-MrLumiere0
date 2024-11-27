@@ -39,6 +39,25 @@ export const App = () => {
     }
   }
 
+  async function handleFormSubmit (event) {
+
+    try{
+        const response  = await fetch("http://localhost:3000/api/wiki", {
+            method:"POST",
+            headers: {
+                'Content-Type': 'application/json'     
+               },
+               body: JSON.stringify(formData)
+        })
+        if(response){
+            goToMain()
+        }
+    }
+    catch(err){
+        console.log("Could not create new entry")
+    }
+  }
+
   useEffect(() => {
     fetchPages()
   }, [])
@@ -54,7 +73,7 @@ export const App = () => {
   </>
   )
   : view == Add_Page ? (
-    <AddPage goToMain = {() => setView(Main_View)}/>
+    <AddPage postPage = {handleFormSubmit}/>
   )
   : view == Article ? (
  <SinglePage goToMain = {() => setView(Main_View)}  slug = {slug}/>
