@@ -17,14 +17,15 @@ router.get('/', async (req, res, next) => {
 // POST /wiki
 router.post('/', async (req, res, next) => {
   try {
-    const [user, wasCreated] = await User.findOrCreate({
+    const user = await User.findOrCreate({
       where: {
         name: req.body.name,
         email: req.body.email
       }
     })
-
+    console.log(req.body)
     const page = await Page.create(req.body)
+
 
     await page.setAuthor(user)
 
@@ -32,7 +33,7 @@ router.post('/', async (req, res, next) => {
       const tagArray = req.body.tags.split(' ')
       const tags = []
       for (const tagName of tagArray) {
-        const [tag, wasCreated] = await Tag.findOrCreate({
+        const tag = await Tag.findOrCreate({
           where: {
             name: tagName
           }
@@ -88,6 +89,7 @@ router.put('/:slug', async (req, res, next) => {
 
 // DELETE /wiki/:slug
 router.delete('/:slug', async (req, res, next) => {
+  console.log(req.params.slug)
   try {
     await Page.destroy({
       where: {

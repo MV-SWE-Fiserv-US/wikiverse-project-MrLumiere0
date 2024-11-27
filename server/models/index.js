@@ -1,7 +1,13 @@
 const { Sequelize } = require('sequelize')
 const { sequelize } = require('../db')
+const DataTypes = require('sequelize')
 
 const Page = sequelize.define('page', {
+  id:{
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   title: {
     type: Sequelize.STRING,
     allowNull: false
