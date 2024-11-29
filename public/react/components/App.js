@@ -20,10 +20,10 @@ export const App = () => {
   const [view,setView] = useState (Main_View)
 
    function setPage(value) {
+    setDisplayPage(true)
         setView(Article)
         const str = value.replaceAll(' ', "_").toLowerCase()
         setSlug(str)
-        console.log(displaySinglePage)
         console.log(slug)
 
   }
