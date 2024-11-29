@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import apiURL from './api'
 
 
-export const AddPage = ({ postPage }) => {
+export const AddPage = ({ handleFormSubmit, goToMain }) => {
     const [formData, setFormData] = useState({
         title: "",
         content: "",
@@ -23,7 +23,7 @@ export const AddPage = ({ postPage }) => {
 
 
    
-}
+
   
 useEffect(() => {
 handleFormData()
@@ -40,7 +40,7 @@ handleFormData()
 
     
         
-        <form onSubmit ={postPage} className='form'>  
+        <form onSubmit ={e => handleFormSubmit(e, formData)} className='form'>  
             <label>
                 Title:
                 </label>

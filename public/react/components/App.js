@@ -39,8 +39,9 @@ export const App = () => {
     }
   }
 
-  async function handleFormSubmit (event) {
+  async function handleFormSubmit (event, formData) {
 
+      event.preventDefault()
     try{
         const response  = await fetch("http://localhost:3000/api/wiki", {
             method:"POST",
@@ -49,14 +50,36 @@ export const App = () => {
                },
                body: JSON.stringify(formData)
         })
-        if(response){
-            goToMain()
-        }
+        console.log(formData)
+        await fetchPages()
+        setView(Main_View)
+        
     }
     catch(err){
         console.log("Could not create new entry")
     }
   }
+
+
+  async function handleDeletePage (event) {
+    console.log(slug)
+
+    try{
+        const response  = await fetch(`http://localhost:3000/api/wiki/${slug}`, {
+            method:"DELETE",
+            headers: {
+                'Content-Type': 'application/json'     
+               },
+        })
+
+        await fetchPages()
+        setView(Main_View)
+    }
+    catch(err){
+        console.log("Could not delete new entry")
+    }
+   
+}
 
   useEffect(() => {
     fetchPages()
@@ -73,10 +96,10 @@ export const App = () => {
   </>
   )
   : view == Add_Page ? (
-    <AddPage postPage = {handleFormSubmit}/>
+    <AddPage goToMain = {() => setView(Main_View)} handleFormSubmit = {handleFormSubmit}/>
   )
   : view == Article ? (
- <SinglePage goToMain = {() => setView(Main_View)}  slug = {slug}/>
+ <SinglePage handleDeletePage = {handleDeletePage} oToMain = {() => setView(Main_View)}  slug = {slug}/>
    ) : (
     <h1>Error in View Controller</h1>
    )
