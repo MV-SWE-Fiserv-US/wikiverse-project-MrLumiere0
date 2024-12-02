@@ -19,7 +19,7 @@ export const App = () => {
   // view state
   const [view,setView] = useState (Main_View)
 
-   function setPage(value) {
+   function setPage(value, slug) {
     setDisplayPage(true)
         setView(Article)
         const str = value.replaceAll(' ', "_").toLowerCase()
@@ -99,7 +99,7 @@ export const App = () => {
     <AddPage goToMain = {() => setView(Main_View)} handleFormSubmit = {handleFormSubmit}/>
   )
   : view == Article ? (
- <SinglePage handleDeletePage = {handleDeletePage} oToMain = {() => setView(Main_View)}  slug = {slug}/>
+ <SinglePage handleDeletePage = {handleDeletePage} goToMain = {() => setView(Main_View)}  slug = {slug}/>
    ) : (
     <h1>Error in View Controller</h1>
    )
